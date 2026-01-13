@@ -48,6 +48,19 @@ const server = http.createServer(async (req, res) => {
   const url = new URL(req.url, "http://localhost");
   const pathname = url.pathname;
 
+  if (pathname === "/") {
+    sendJson(res, 200, {
+      name: "mcp_fiumi_romagna",
+      status: "ok",
+      endpoints: {
+        health: "/health",
+        stazioni: "/stazioni",
+        livello_idrometrico: "/livello-idrometrico?fiume=Lamone"
+      }
+    });
+    return;
+  }
+
   if (pathname === "/health") {
     sendJson(res, 200, { ok: true });
     return;
