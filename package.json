@@ -1,0 +1,16 @@
+{
+  "name": "mcp-fiumi-romagna",
+  "version": "0.1.0",
+  "description": "MCP server per livelli idrometrici dei fiumi in Romagna (Allerta Emilia-Romagna)",
+  "type": "module",
+  "bin": {
+    "mcp-fiumi-romagna": "./src/index.js"
+  },
+  "scripts": {
+    "start": "node ./src/index.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.4",
+    "zod": "^3.23.8"
+  }
+}
