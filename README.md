@@ -15,6 +15,23 @@ npm install
 npm start
 ```
 
+## HTTP server (for GPT Actions)
+Expose the HTTP API locally:
+```
+npm run start:http
+```
+
+Endpoints:
+- `GET /livello-idrometrico?fiume=Ronco`
+- `GET /stazioni?filtro=Savio&max_results=20`
+- `GET /health`
+
+## GPT Store (Actions) setup
+1) Deploy the HTTP server to a public HTTPS URL (Render/Fly/Railway/your VPS).
+2) Set `servers[0].url` in `openapi.yaml` to your public base URL.
+3) In the GPT Builder, add an Action and upload `openapi.yaml`.
+4) Test calls inside the GPT Builder and publish your GPT.
+
 ## MCP configuration (stdio)
 Example configuration:
 ```
