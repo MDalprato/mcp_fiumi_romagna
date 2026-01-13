@@ -1,22 +1,22 @@
 # MCP Fiumi Romagna
 
-MCP server per interrogare i livelli idrometrici tramite le stesse API del sito Allerta Emilia-Romagna.
+MCP server that retrieves river level data from the official Allerta Emilia-Romagna APIs.
 
-## Requisiti
+## Requirements
 - Node.js 18+
 
-## Installazione
+## Install
 ```
 npm install
 ```
 
-## Avvio
+## Run
 ```
 npm start
 ```
 
-## Configurazione MCP (stdio)
-Esempio di configurazione:
+## MCP configuration (stdio)
+Example configuration:
 ```
 {
   "mcpServers": {
@@ -28,15 +28,15 @@ Esempio di configurazione:
 }
 ```
 
-## Tool disponibili
+## Available tools
 - `livello_idrometrico`
   - Input: `{ "fiume": "Ronco", "max_results": 3 }`
-  - Risultato: livello idrometrico per le stazioni che matchano il nome del fiume.
+  - Output: river level data for stations matching the river or station name.
 
 - `elenco_stazioni_idrometriche`
   - Input: `{ "filtro": "Savio", "max_results": 20 }`
-  - Risultato: elenco stazioni idrometriche disponibili.
+  - Output: list of available hydrometric stations (optionally filtered).
 
-## Note
-- I dati provengono da `https://allertameteo.regione.emilia-romagna.it/o/api/allerta/get-sensor-values-no-time` con variabile idrometrica `254,0,0/1,-,-,-/B13215`.
-- Se il nome del fiume non matcha nessuna stazione, il tool suggerisce stazioni simili.
+## Notes
+- Data source: `https://allertameteo.regione.emilia-romagna.it/o/api/allerta/get-sensor-values-no-time` with idrometric variable `254,0,0/1,-,-,-/B13215`.
+- If no station matches the provided name, the tool returns close station suggestions.
