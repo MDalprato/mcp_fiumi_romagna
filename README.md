@@ -45,6 +45,21 @@ Example configuration:
 }
 ```
 
+## OpenAI retrieval (file search)
+The MCP can use OpenAI file search to improve matching when a station name is misspelled
+or incomplete. This follows the OpenAI retrieval guide.
+
+Setup:
+1) Set `OPENAI_API_KEY`.
+2) Run `npm run retrieval:setup` to create a vector store from the latest station list.
+3) Copy the printed `Vector store ID` into `OPENAI_VECTOR_STORE_ID`.
+
+Optional environment variables:
+- `OPENAI_MODEL` (default: `gpt-4.1-mini`)
+- `OPENAI_BASE_URL` (override if you use a proxy)
+- `OPENAI_VECTOR_STORE_NAME` (default: `mcp-fiumi-romagna`)
+- `OPENAI_BETA` (set if your OpenAI account requires beta headers)
+
 ## Available tools
 - `livello_idrometrico`
   - Input: `{ "fiume": "Ronco", "max_results": 3 }`

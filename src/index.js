@@ -10,9 +10,9 @@ import { z } from "zod";
 import {
   fetchSensorValues,
   formatValue,
-  normalizeText,
-  selectStationsByQuery
+  normalizeText
 } from "./core.js";
+import { selectStationsByQueryWithRetrieval } from "./retrieval.js";
 
 const LivelloIdrometricoInput = z.object({
   fiume: z.string().min(1),
@@ -97,7 +97,11 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
     const { ts, data } = await fetchSensorValues();
     const entries = data.filter((item) => item.nomestaz);
 
-    const { matches, suggestions } = selectStationsByQuery(entries, input.fiume);
+    const { matches, suggestions } = await selectStationsByQueryWithRetrieval(
+      entries,
+      input.fiume,
+      { maxResults: Math.min(input.max_results ?? 5, 5) }
+    );
 
     if (matches.length === 0) {
       const messageLines = [

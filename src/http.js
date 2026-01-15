@@ -5,9 +5,9 @@ import { URL } from "node:url";
 import {
   fetchSensorValues,
   formatValue,
-  normalizeText,
-  selectStationsByQuery
+  normalizeText
 } from "./core.js";
+import { selectStationsByQueryWithRetrieval } from "./retrieval.js";
 
 function sendJson(res, statusCode, body) {
   const payload = JSON.stringify(body, null, 2);
@@ -76,10 +76,14 @@ const server = http.createServer(async (req, res) => {
     try {
       const { ts, data } = await fetchSensorValues();
       const entries = data.filter((item) => item.nomestaz);
-      const { matches, suggestions } = selectStationsByQuery(entries, fiume);
       const maxResults = parseMaxResults(
         url.searchParams.get("max_results"),
         10
+      );
+      const { matches, suggestions } = await selectStationsByQueryWithRetrieval(
+        entries,
+        fiume,
+        { maxResults: Math.min(maxResults, 5) }
       );
 
       sendJson(res, 200, {
