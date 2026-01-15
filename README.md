@@ -2,17 +2,26 @@
 
 MCP server that retrieves river level data from the official Allerta Emilia-Romagna APIs.
 
+![MCP Fiumi Romagna](mcp-fiumi-romagna.jpeg)
+
 ## Requirements
-- Node.js 18+
+- Node.js 18+ (for the JS MCP and HTTP server)
+- Python 3.10+ (for the FastMCP Python server)
 
 ## Install
 ```
 npm install
 ```
 
-## Run
+## Run (Node MCP)
 ```
 npm start
+```
+
+## Run (Python FastMCP)
+```
+python3 -m pip install fastmcp
+python3 src/streams.py
 ```
 
 ## HTTP server (for GPT Actions)
@@ -33,7 +42,7 @@ Endpoints:
 4) Test calls inside the GPT Builder and publish your GPT.
 
 ## MCP configuration (stdio)
-Example configuration:
+Example configuration (Node MCP):
 ```
 {
   "mcpServers": {
@@ -45,9 +54,22 @@ Example configuration:
 }
 ```
 
+Example configuration (Python FastMCP):
+```
+{
+  "mcpServers": {
+    "fiumi-romagna": {
+      "command": "python3",
+      "args": ["/Users/marcodalprato/GitHub/mcp_fiumi_romagna/src/streams.py"]
+    }
+  }
+}
+```
+
 ## OpenAI retrieval (file search)
 The MCP can use OpenAI file search to improve matching when a station name is misspelled
-or incomplete. This follows the OpenAI retrieval guide.
+or incomplete. This follows the OpenAI retrieval guide and works for both the JS
+and Python servers.
 
 Setup:
 1) Set `OPENAI_API_KEY`.
