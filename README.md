@@ -4,6 +4,8 @@ MCP server that retrieves river level data from the official Allerta Emilia-Roma
 
 ![MCP Fiumi Romagna](mcp-fiumi-romagna.jpeg)
 
+MCP endpoint: `https://fiumi-romagna.fastmcp.app/mcp`
+
 ## Requirements
 - Node.js 18+ (for the JS MCP and HTTP server)
 - Python 3.10+ (for the FastMCP Python server)
